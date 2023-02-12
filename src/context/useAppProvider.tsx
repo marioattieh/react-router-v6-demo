@@ -9,9 +9,9 @@ AppContext.displayName = "AppContext";
 const Provider = AppContext.Provider;
 
 export function useAppContext() {
-    const table = useContext<AppContextType>(AppContext);
+    const app = useContext<AppContextType>(AppContext);
 
-    return table;
+    return app;
 }
 
 const useAppProvider = () => {

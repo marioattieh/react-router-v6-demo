@@ -1,18 +1,22 @@
 import { useReducer } from "react";
 
-import { Action, ActionType, State } from "../types";
+import { Action, ActionType, Roles, State } from "../types";
 
 const initialState: State = {
-    isAuthenticated: false,
-    role: null
+    isAuthenticated: !!localStorage.getItem("isAuthenticated"),
+    role: localStorage.getItem("role") as Roles
 };
 
 const reducer = (state: State, action: Action): State => {
     switch (action.type) {
         case ActionType.Authenticate:
-            return { isAuthenticated: true, role: action.role };
+            localStorage.setItem("isAuthenticated", "true");
+            localStorage.setItem("role", action.role ? action.role.toString() : initialState.role);
+            return { isAuthenticated: true, role: action.role || initialState.role };
         case ActionType.Deauthenticate:
-            return { isAuthenticated: false, role: action.role };
+            localStorage.removeItem("isAuthenticated");
+            localStorage.removeItem("role");
+            return { isAuthenticated: false, role: Roles.None };
         default:
             return state;
     }
