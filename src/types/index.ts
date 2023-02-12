@@ -7,19 +7,19 @@ export enum Roles {
 
 export interface State {
     role: Roles | null;
+    isAuthenticated: boolean;
 }
 
 export enum ActionType {
-    SetAdminRole,
-    SetUserRole,
-    ClearRole
+    Authenticate,
+    Deauthenticate
 }
 
 export interface Action {
     type: ActionType;
+    role: Roles | null;
 }
 
-export interface AppContextType {
+export interface AppContextType extends State {
     dispatch: Dispatch<Action>;
-    role: Roles | null;
 }
