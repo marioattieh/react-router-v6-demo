@@ -1,12 +1,13 @@
-import { Dispatch } from "react";
+import { Dispatch, FC } from "react";
 
 export enum Roles {
-    Admin,
-    User
+    Admin = "Admin",
+    User = "User",
+    None = "None"
 }
 
 export interface State {
-    role: Roles | null;
+    role: Roles;
     isAuthenticated: boolean;
 }
 
@@ -17,9 +18,23 @@ export enum ActionType {
 
 export interface Action {
     type: ActionType;
-    role: Roles | null;
+    role?: Roles;
 }
 
 export interface AppContextType extends State {
     dispatch: Dispatch<Action>;
+}
+
+export interface RoutesType {
+    index?: boolean;
+    path?: string;
+    roles: Roles[];
+    order?: number;
+    disabled?: boolean;
+    menuVisible?: boolean;
+    isSelected?: boolean;
+    iconName?: string;
+    title?: string;
+    component: FC;
+    children?: RoutesType[];
 }

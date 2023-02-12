@@ -1,8 +1,15 @@
 import React from "react";
+
 import AppRoutes from "./routes/AppRoutes";
 
+import "./App.css";
+
 const App = () => {
-    return <AppRoutes />;
+    return (
+        <div className="app-container">
+            <AppRoutes />
+        </div>
+    );
 };
 
 export default App;
