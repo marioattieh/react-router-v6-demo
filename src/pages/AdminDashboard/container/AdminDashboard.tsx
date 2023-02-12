@@ -1,7 +1,9 @@
 import React, { FC } from "react";
+import withTitle from "../../../hoc/withTitle";
+import AppCompose from "../../../utils/AppCompose";
 
 const AdminDashboard: FC = () => {
-    return <div>AdminDashboard</div>;
+    return <></>;
 };
 
-export default AdminDashboard;
+export default AppCompose(withTitle)(AdminDashboard);
