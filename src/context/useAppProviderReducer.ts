@@ -1,19 +1,18 @@
-import React, { useReducer } from "react";
+import { useReducer } from "react";
 
-import { Action, ActionType, Roles, State } from "../types";
+import { Action, ActionType, State } from "../types";
 
 const initialState: State = {
+    isAuthenticated: false,
     role: null
 };
 
 const reducer = (state: State, action: Action): State => {
     switch (action.type) {
-        case ActionType.SetAdminRole:
-            return { role: Roles.Admin };
-        case ActionType.SetUserRole:
-            return { role: Roles.User };
-        case ActionType.ClearRole:
-            return { role: null };
+        case ActionType.Authenticate:
+            return { isAuthenticated: true, role: action.role };
+        case ActionType.Deauthenticate:
+            return { isAuthenticated: false, role: action.role };
         default:
             return state;
     }
