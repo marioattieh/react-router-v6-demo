@@ -16,9 +16,11 @@ const SidePanelItem: FC<{ route: RoutesType }> = ({ route }) => {
 
     const onClick = useCallback(() => navigate(`/${route.path}`), [route]);
 
+    if (!route.menuVisible) return null;
+
     return (
         <div className={className} onClick={onClick}>
-            <img src={Icon} />
+            <img src={Icon} className="sidepanel-icon" />
             <div className="tooltiptext">{route.title}</div>
         </div>
     );
