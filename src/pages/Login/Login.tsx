@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, useCallback, useState, KeyboardEvent } from "react";
 import { useAppContext } from "../../context/useAppProvider";
 import { ActionType, Roles } from "../../types";
 
@@ -26,6 +26,13 @@ const Login = () => {
         else dispatch({ type: ActionType.Authenticate, role: Roles.User });
     }, [username, password]);
 
+    const keyDownHanlder = useCallback(
+        (e: KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === "Enter") hanldeLoginClick();
+        },
+        [hanldeLoginClick]
+    );
+
     return (
         <div className="login-container">
             <input
@@ -34,6 +41,7 @@ const Login = () => {
                 aria-describedby="appUsername"
                 value={username}
                 onChange={onUsernameChange}
+                onKeyDown={keyDownHanlder}
                 className="login-inputs"
                 placeholder="Username"
             />
@@ -43,6 +51,7 @@ const Login = () => {
                 aria-describedby="appPassword"
                 value={password}
                 onChange={onPasswordChange}
+                onKeyDown={keyDownHanlder}
                 className="login-inputs"
                 placeholder="Password"
             />
