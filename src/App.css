@@ -24,9 +24,14 @@
     right: 30px;
     top: 30px;
     border-radius: 8px;
-    background-color: #00000055;
+    background-color: #00000033;
     padding: 10px 20px;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
+    transition: background-color 300ms;
+}
+
+.logout-button:hover {
+    background-color: #00000055;
 }

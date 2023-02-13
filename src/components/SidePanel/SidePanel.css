@@ -1,17 +1,22 @@
 .sidepanel-container {
     position: absolute;
     left: 0;
-    width: 4vw;
     min-height: 4vw;
     background-color: white;
-    top: 50%;
+    top: 30%;
     translate: 0 -50%;
     border-radius: 0 8px 8px 0;
-    padding: 5px;
+    padding: 10px;
 }
 
 .sidepanel-image {
     cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.sidepanel-image:last-of-type {
+    margin-bottom: 0;
 }
 
 .sidepanel-image:hover {
@@ -20,4 +25,9 @@
 
 .selected {
     background-color: #9a9ae1cc;
+}
+
+.sidepanel-icon {
+    width: 4vw;
+    aspect-ratio: 1;
 }
