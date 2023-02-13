@@ -5,6 +5,7 @@ import AppRoutes from "./routes/AppRoutes";
 import "./App.css";
 import { useAppContext } from "./context/useAppProvider";
 import { ActionType } from "./types";
+import SidePanel from "./components/SidePanel/SidePanel";
 
 const App = () => {
     const { isAuthenticated, dispatch } = useAppContext();
@@ -20,6 +21,7 @@ const App = () => {
                     LOGOUT
                 </div>
             )}
+            {isAuthenticated && <SidePanel />}
             <AppRoutes />
         </div>
     );

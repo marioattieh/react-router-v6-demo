@@ -1,0 +1,23 @@
+.sidepanel-container {
+    position: absolute;
+    left: 0;
+    width: 4vw;
+    min-height: 4vw;
+    background-color: white;
+    top: 50%;
+    translate: 0 -50%;
+    border-radius: 0 8px 8px 0;
+    padding: 5px;
+}
+
+.sidepanel-image {
+    cursor: pointer;
+}
+
+.sidepanel-image:hover {
+    background-color: #9a9ae1cc;
+}
+
+.selected {
+    background-color: #9a9ae1cc;
+}
