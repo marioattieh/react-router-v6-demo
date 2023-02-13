@@ -1,6 +1,7 @@
 .app-container {
     min-height: 100vh;
     width: 100vw;
+    position: relative;
     background-image: linear-gradient(
         to right top,
         #d16ba5,
@@ -16,4 +17,16 @@
         #46eefa,
         #5ffbf1
     );
+}
+
+.logout-button {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    border-radius: 8px;
+    background-color: #00000055;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
 }
