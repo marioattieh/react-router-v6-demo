@@ -7,7 +7,11 @@ import "./../../utils/Tooltip.css";
 import "./SidePanel.css";
 import { useNavigate } from "react-router-dom";
 
-const SidePanelItem: FC<{ route: RoutesType }> = ({ route }) => {
+interface Props {
+    route: RoutesType;
+}
+
+const SidePanelItem: FC<Props> = ({ route }) => {
     const navigate = useNavigate();
     const Icon = require(`../../icons/${route.iconName}.svg`);
     const className = classNames("tooltip", "sidepanel-image", {

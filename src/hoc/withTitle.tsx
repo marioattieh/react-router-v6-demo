@@ -2,7 +2,6 @@ import React, { FC } from "react";
 
 interface Props {
     title?: string;
-    disclaimerMessage?: string;
 }
 
 const withTitle = <T extends Props>(Component: FC<T>) => {

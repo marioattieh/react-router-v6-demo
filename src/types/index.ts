@@ -6,19 +6,24 @@ export enum Roles {
     None = "None"
 }
 
-export interface State {
-    role: Roles;
-    isAuthenticated: boolean;
-}
-
 export enum ActionType {
     Authenticate,
     Deauthenticate
 }
 
+export enum Toggle {
+    On,
+    Off
+}
+
 export interface Action {
     type: ActionType;
     role?: Roles;
+}
+
+export interface State {
+    role: Roles;
+    isAuthenticated: boolean;
 }
 
 export interface AppContextType extends State {
@@ -35,6 +40,10 @@ export interface RoutesType {
     isSelected?: boolean;
     iconName?: string;
     title?: string;
-    component: FC;
+    component: FC<Record<string, unknown> & TitleProps>;
     children?: RoutesType[];
+}
+
+export interface TitleProps {
+    title?: string;
 }

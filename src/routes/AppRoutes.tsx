@@ -1,4 +1,4 @@
-import React, { cloneElement, useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAppContext } from "../context/useAppProvider";
@@ -11,42 +11,35 @@ const AppRoutes = () => {
     const { isAuthenticated } = useAppContext();
     const routes = useRoutes();
 
-    const defaultRoute = {
-        path: "/",
-        element: !isAuthenticated ? <Login /> : <Navigate to={routes[0].path || "/"} />
-    };
+    const defaultRoute = useMemo(
+        () => ({
+            path: "/",
+            element: !isAuthenticated ? <Login /> : <Navigate to={routes[0].path || "/"} />
+        }),
+        [isAuthenticated, routes]
+    );
 
-    const allRoutes = useCallback(
-        (routes?: RoutesType[]) => {
-            if (!routes?.length) return null;
+    const nestedRoutes = useCallback(
+        (routes: RoutesType[]) => {
+            if (!isAuthenticated) return null;
 
-            return routes.map((route) => {
-                const component = cloneElement(<route.component />, { title: route.title });
-
-                return (
-                    <Route
-                        key={String(route.path) + component.key}
-                        path={route?.index ? undefined : route.path}
-                        index={route.index}
-                        element={
-                            <ProtectedRoute
-                                isAuthenticated={isAuthenticated}
-                                authenticationPath={defaultRoute.path}
-                                outlet={component}
-                            />
-                        }>
-                        {allRoutes(route.children)}
-                    </Route>
-                );
-            });
+            return routes.map((route) => (
+                <Route
+                    key={`${route.path}${route.component.displayName}`}
+                    path={route.path}
+                    index={route.index}
+                    element={<ProtectedRoute outlet={<route.component title={route.title} />} />}>
+                    {!!route.children && nestedRoutes(route.children)}
+                </Route>
+            ));
         },
-        [isAuthenticated, defaultRoute]
+        [isAuthenticated]
     );
 
     return (
         <Routes>
-            <Route path={defaultRoute.path} element={defaultRoute.element} />
-            {isAuthenticated && allRoutes(routes)}
+            <Route {...defaultRoute} />
+            {nestedRoutes(routes)}
             <Route path="*" element={<Navigate to={defaultRoute.path} />} />
         </Routes>
     );

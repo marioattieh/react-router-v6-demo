@@ -1,15 +1,16 @@
 import React, { FC } from "react";
 
 import { Navigate } from "react-router-dom";
+import { useAppContext } from "../context/useAppProvider";
 
 interface Props {
-    isAuthenticated: boolean;
-    authenticationPath: string;
     outlet: JSX.Element;
+    defaultPath?: string;
 }
 
-const ProtectedRoute: FC<Props> = ({ isAuthenticated, authenticationPath, outlet }) => {
-    return isAuthenticated ? outlet : <Navigate to={authenticationPath} />;
+const ProtectedRoute: FC<Props> = ({ defaultPath = "/", outlet }) => {
+    const { isAuthenticated } = useAppContext();
+    return isAuthenticated ? outlet : <Navigate to={defaultPath} />;
 };
 
 export default ProtectedRoute;
