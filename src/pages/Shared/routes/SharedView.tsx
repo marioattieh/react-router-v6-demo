@@ -7,7 +7,7 @@ import AppCompose from "../../../utils/AppCompose";
 
 const SharedView = () => {
     return (
-        <div style={{ marginLeft: "5vw", padding: "30px" }}>
+        <div style={{ padding: "30px" }}>
             <ToggleTest />
             <ToggleTest toggle={Toggle.Off} />
         </div>
