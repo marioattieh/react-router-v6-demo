@@ -31,19 +31,19 @@ const Route: RoutesType = {
         },
         {
             path: "nested",
-            roles: [Roles.Admin, Roles.User],
+            roles: [Roles.Admin],
             component: SharedNested,
             title: "Shared Nested",
             children: [
                 {
                     index: true,
-                    roles: [Roles.Admin, Roles.User],
+                    roles: [Roles.Admin],
                     component: SharedNestedIndex,
                     title: "Shared Nested Index"
                 },
                 {
                     path: "view",
-                    roles: [Roles.Admin, Roles.User],
+                    roles: [Roles.Admin],
                     component: SharedNestedView,
                     title: "Shared Nested View"
                 }

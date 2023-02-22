@@ -1,9 +1,9 @@
 import { Dispatch, FC } from "react";
 
 export enum Roles {
+    None = "None",
     Admin = "Admin",
-    User = "User",
-    None = "None"
+    User = "User"
 }
 
 export enum ActionType {
@@ -30,20 +30,28 @@ export interface AppContextType extends State {
     dispatch: Dispatch<Action>;
 }
 
-export interface RoutesType {
-    index?: boolean;
+export interface PathRoutesType {
+    index?: false;
     path?: string;
-    roles: Roles[];
+    roles?: Roles[];
     order?: number;
     disabled?: boolean;
     menuVisible?: boolean;
     isSelected?: boolean;
     iconName?: string;
     title?: string;
-    component: FC<Record<string, unknown> & TitleProps>;
+    component: FC<Record<string, unknown> & HocProps>;
     children?: RoutesType[];
 }
 
-export interface TitleProps {
+export interface IndexRoutesType extends Omit<PathRoutesType, "index"> {
+    index: true;
+    children?: never;
+}
+
+export type RoutesType = PathRoutesType | IndexRoutesType;
+
+export interface HocProps {
     title?: string;
+    toggle?: Toggle;
 }

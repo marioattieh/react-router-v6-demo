@@ -9,7 +9,7 @@ const useRoutes = () => {
 
     return pages
         .filter((page) => {
-            if (!page.roles.includes(role) || page?.disabled) return false;
+            if (!page.roles?.includes(role) || page?.disabled) return false;
             page.isSelected = !!page.path && location.pathname.includes(page.path);
             return true;
         })

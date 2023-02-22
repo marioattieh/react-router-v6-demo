@@ -8,7 +8,7 @@ import { RoutesType } from "../types";
 import ProtectedRoute from "./ProtectedRoute";
 
 const AppRoutes = () => {
-    const { isAuthenticated } = useAppContext();
+    const { isAuthenticated, role } = useAppContext();
     const routes = useRoutes();
 
     const defaultRoute = useMemo(
@@ -23,17 +23,23 @@ const AppRoutes = () => {
         (routes: RoutesType[]) => {
             if (!isAuthenticated) return null;
 
-            return routes.map((route) => (
-                <Route
-                    key={`${route.path}${route.component.displayName}`}
-                    path={route.path}
-                    index={route.index}
-                    element={<ProtectedRoute outlet={<route.component title={route.title} />} />}>
-                    {!!route.children && nestedRoutes(route.children)}
-                </Route>
-            ));
+            return routes.reduce((acc: JSX.Element[], route) => {
+                const key = `${route.path}${route.component.displayName}`;
+                const element = <ProtectedRoute outlet={<route.component title={route.title} />} />;
+                if (!route.roles?.includes(role)) return acc;
+
+                if (route.index) acc.push(<Route key={key} element={element} index />);
+
+                acc.push(
+                    <Route key={key} element={element} path={route.path}>
+                        {route.children && nestedRoutes(route.children)}
+                    </Route>
+                );
+
+                return acc;
+            }, []);
         },
-        [isAuthenticated]
+        [isAuthenticated, role]
     );
 
     return (
